@@ -73,7 +73,7 @@ main {
     align-content: center;
 }
 
-#main-game {
+#grid {
     height: 400px;
     width: 400px;
     display: flex;
