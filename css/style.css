@@ -65,4 +65,17 @@ select {
     align-items: center;
 }
 
+/* MAIN */
+
+
+
+
+
+/* FOOTER */
+footer {
+    background-color: white;
+    height: 40px;
+    line-height: 40px;
+    font-size: 12px;
+}
 
