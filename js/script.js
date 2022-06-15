@@ -23,7 +23,7 @@ function startGame() {
     mainGrid.innerHTML = '';
 
     // Variabile numero massimo bombe
-    const maxBombs = 16;
+    const maxBombs = 2;
 
     // SCELTA DELL'UTENTE PER LA DIFFICOLTA' DEL GIOCO
     // Rendiamo valido il valore scelto dall'utente tra EASY, MEDIUM e HARD
@@ -48,7 +48,7 @@ function startGame() {
         maxNumber = 81;
         classSquare = 'medium';
     } else if(userLv === 'hard') {
-        maxNumber = 49;
+        maxNumber = 5;
         classSquare = 'hard';
     }
 
@@ -59,11 +59,14 @@ function startGame() {
     const bombsList = bombsNumber(1, maxNumber, maxBombs);
     // Lista totale delle 16 bombe
     console.log('Lista totale bombe:', bombsList);
-
     
     // Variabile numero massimo di tentativi 
     let maxAttempts = maxNumber - maxBombs;
     console.log('Tentativi massimi:', maxAttempts);
+
+    // Array punteggio finale con tutti i numeri giusti dati dal cliente
+    const correctNumbers = [];
+
 
     // Generatore della griglia in base al maxNumber 
     generateSquare();
@@ -77,10 +80,46 @@ function startGame() {
 
              // // Aggiungere una classe per creare le dimensioni dei quadrati 
             newDiv.classList.add(classSquare);
-            console.log(mainGrid);
+
+            // Dichiaro la funzione se il numero cliccato e' giusto o sbagliato
+            newDiv.addEventListener('click', userClickSquare);
 
             // Appendere alla nostra mainGrid
             mainGrid.append(newDiv);
+        }
+    }
+
+    // Funzione per determinare se il numero selezionato dall'utente e' giusto (azzurro) o sbagliato (rosso)
+    function userClickSquare() {
+
+        // leggere il valore del numero selezionato dall'utente
+        const singleNumber = parseInt(this.querySelector('span').innerHTML);
+        console.log(singleNumber);
+
+        // Variabile default true da sovvrascrivere in false per finire il gioco
+        let endGame = true;
+        
+        // Se il numero e' incluso nella bombList, allora lo square diventa rosso = hai perso, dine del gioco
+        if(bombsList.includes(singleNumber)) {
+            this.classList.add('red');
+            endGame = false;
+            
+        } else {
+            // Se il numero e' corretto allora lo si aggiunge all'array correctNumbers e lo square diventa azzurro
+            if(!correctNumbers.includes(singleNumber)) {
+                correctNumbers.push(singleNumber)
+            }
+            console.log('Lista numeri esatti:', correctNumbers);
+    
+            // Se il numero e' giusto, lo square diventa azzurro
+            if(!bombsList.includes(singleNumber)) {
+                this.classList.add('blue');
+            }
+            // Finiti i maxAttempt, fine del gioco = hai vinto
+            if(correctNumbers.length === maxAttempts) {
+                endGame = false;
+                
+            }
         }
     }
 }
