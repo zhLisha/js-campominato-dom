@@ -15,6 +15,7 @@
 const bntStartGame = document.querySelector('#start-game');
 bntStartGame.addEventListener('click', startGame)
 
+
 function startGame() {
     // Elementi HTML 
     const mainGrid = document.querySelector('#grid');
@@ -53,17 +54,14 @@ function startGame() {
         classSquare = 'hard';
     }
 
-    console.log(maxNumber);
-
    
     // GENERATORE NUMERI RANDOM BOMBA
     const bombsList = bombsNumber(1, maxNumber, maxBombs);
-    // Lista totale delle 16 bombe
-    console.log('Lista totale bombe:', bombsList);
+
     
     // Variabile numero massimo di tentativi 
     let maxAttempts = maxNumber - maxBombs;
-    console.log('Tentativi massimi:', maxAttempts);
+
 
     // Array punteggio finale con tutti i numeri giusti dati dal cliente
     const correctNumbers = [];
@@ -90,21 +88,19 @@ function startGame() {
         }
     }
 
+
     // Funzione per determinare se il numero selezionato dall'utente e' giusto (azzurro) o sbagliato (rosso)
     function userClickSquare() { 
 
         // leggere il valore del numero selezionato dall'utente
         const singleNumber = parseInt(this.querySelector('span').innerHTML);
-        console.log(singleNumber);
 
-        // Variabile default true da sovvrascrivere in false per finire il gioco
-        let endGame = true;  
-        
+    
         // Se il numero e' incluso nella bombList, allora lo square diventa rosso = hai perso, dine del gioco
         if(bombsList.includes(singleNumber)) {
             this.classList.add('red');
-            endGame = false;
-            userMessage.innerHTML = `Mi dispiace, hai perso! Il tuo punteggio è: ${correctNumbers.length}` ;
+            userMessage.innerHTML = `Mi dispiace, hai perso! Il tuo punteggio è: ${correctNumbers.length}`;
+            endGame();
         } else {
             // Se il numero e' corretto allora lo si aggiunge all'array correctNumbers e lo square diventa azzurro
             // Se il numero e' giusto, lo square diventa azzurro
@@ -113,12 +109,9 @@ function startGame() {
                 correctNumbers.push(singleNumber);
             }
 
-            console.log('Lista numeri esatti:', correctNumbers);
-
             // Finiti i maxAttempt, fine del gioco = hai vinto
             if(correctNumbers.length === maxAttempts) {
-                endGame = false;
-                userMessage.innerHTML = `Congratulazioni, hai vinto!Il tuo punteggio è: ${correctNumbers.length}` ;
+                userMessage.innerHTML = `Congratulazioni, hai vinto!Il tuo punteggio è: ${correctNumbers.length}`;
             }
         }
     }

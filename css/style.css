@@ -84,6 +84,9 @@ main {
 }
 
 .squares {
+    display: flex;
+    justify-content: center;
+    align-items: center;
     border: 1px solid black;
 }
 
@@ -109,7 +112,6 @@ main {
     width: calc(100% / 7);
     height: calc(100% / 7);
 }
-
 
 
 /* FOOTER */
