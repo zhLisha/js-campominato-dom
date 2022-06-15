@@ -8,7 +8,6 @@
 /* COMMON */
 body {
     font-family: Arial, Helvetica, sans-serif;
-    background-color: #7fffd4;
 }
 
 .container {
@@ -66,7 +65,48 @@ select {
 }
 
 /* MAIN */
+main {
+    background-color: #7fffd4;
+    padding: 90px;
+    display: flex;
+    justify-content: center;
+    align-content: center;
+}
 
+#main-game {
+    height: 400px;
+    width: 400px;
+    display: flex;
+    flex-wrap: wrap;
+    align-content: flex-start;
+}
+
+.squares {
+    border: 1px solid black;
+}
+
+.squares.blue {
+    background-color: #6495ed;
+    color: white;
+}
+
+.squares.red {
+    background-color: #dc143c;;
+    color: white;
+}
+
+.squares.easy {
+    width: calc(100% / 10);
+    height: calc(100% / 10);
+}
+.squares.medium {
+    width: calc(100% / 9);
+    height: calc(100% / 9);
+}
+.squares.hard {
+    width: calc(100% / 7);
+    height: calc(100% / 7);
+}
 
 
 
@@ -77,5 +117,10 @@ footer {
     height: 40px;
     line-height: 40px;
     font-size: 12px;
+    display: flex;
+    align-items: end;
+    position: absolute;
+    bottom: 0;
+    width: 100%;
 }
 
