@@ -24,7 +24,7 @@ function startGame() {
     mainGrid.innerHTML = '';
 
     // Variabile numero massimo bombe
-    const maxBombs = 2;
+    const maxBombs = 16;
 
     // SCELTA DELL'UTENTE PER LA DIFFICOLTA' DEL GIOCO
     // Rendiamo valido il valore scelto dall'utente tra EASY, MEDIUM e HARD
@@ -49,7 +49,7 @@ function startGame() {
         maxNumber = 81;
         classSquare = 'medium';
     } else if(userLv === 'hard') {
-        maxNumber = 7;
+        maxNumber = 49;
         classSquare = 'hard';
     }
 
