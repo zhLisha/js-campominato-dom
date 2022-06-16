@@ -23,6 +23,7 @@ function startGame() {
 
     // Svuotare la griglia ad nuova selezione del livello 
     mainGrid.innerHTML = '';
+    userMessage.innerHTML = '';
 
     // Variabile numero massimo bombe
     const maxBombs = 16;
@@ -100,7 +101,7 @@ function startGame() {
         if(bombsList.includes(singleNumber)) {
             this.classList.add('red');
             userMessage.innerHTML = `Mi dispiace, hai perso! Il tuo punteggio è: ${correctNumbers.length}`;
-            endGame();
+            noClickAnymore();
         } else {
             // Se il numero e' corretto allora lo si aggiunge all'array correctNumbers e lo square diventa azzurro
             // Se il numero e' giusto, lo square diventa azzurro
@@ -112,7 +113,27 @@ function startGame() {
             // Finiti i maxAttempt, fine del gioco = hai vinto
             if(correctNumbers.length === maxAttempts) {
                 userMessage.innerHTML = `Congratulazioni, hai vinto!Il tuo punteggio è: ${correctNumbers.length}`;
+                noClickAnymore();
             }
+        }
+    }
+
+    // Funzione che rende non piu' cliccabile il gioco dopo
+    function noClickAnymore() {
+        // Richiamo tutte le caselle con classe .square
+        const allSquares = document.querySelectorAll('.squares');
+        
+        for(let i = 0; i < allSquares.length; i++){
+            const singleSquare = allSquares[i];
+
+            
+            // Se il numero e' compreso tra le bombe gli aggiungo la classe red per far uscire tutti i numeri bomba allo scoperto
+            const allSquareNumber = parseInt(singleSquare.querySelector('span').innerHTML);
+            if(bombsList.includes(allSquareNumber)) {
+            singleSquare.classList.add('red');
+            }
+            // Rendo non cliccabile le caselle alla fine del gioco sia che abbia vinto o perso
+            singleSquare.style.pointerEvents = 'none';
         }
     }
 }
